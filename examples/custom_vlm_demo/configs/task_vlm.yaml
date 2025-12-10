@@ -1,0 +1,41 @@
+work_dir: outputs/custom_vlm_demo
+eval_type: openai_api
+eval_backend: Native
+
+# 主模型（占位将由 run.py 注入环境变量）
+model: ${MAIN_MODEL_ID}
+model_id: ${MAIN_MODEL_ID}
+api_url: ${MAIN_API_URL}
+api_key: ${MAIN_API_KEY}
+generation_config:
+  temperature: 0.0
+  max_tokens: 1024
+
+datasets:
+  - general_vqa
+  - general_vmcq
+dataset_args:
+  general_vqa:
+    local_path: custom_eval/multimodal/vqa
+    subset_list:
+      - example_openai
+  general_vmcq:
+    local_path: custom_eval/multimodal/mcq
+    subset_list:
+      - example
+
+limit: 5
+eval_batch_size: 1
+seed: 42
+
+# LLM as a judge（占位将由 run.py 注入环境变量）
+judge_model_args:
+  model_id: ${JUDGE_MODEL_ID}
+  api_url: ${JUDGE_API_URL}
+  api_key: ${JUDGE_API_KEY}
+  generation_config:
+    temperature: 0.0
+    max_tokens: 4096
+judge_worker_num: 2
+judge_strategy: llm
+analysis_report: true
