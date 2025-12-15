@@ -1,4 +1,4 @@
-import ast
+import json
 import numpy as np
 from typing import Any, Dict, List
 
@@ -52,20 +52,28 @@ PROMPT_TEMPLATE = r""" You are an AI assistant specialized in converting PDF ima
 **The evaluation in EvalScope implements the `end2end` and `quick_match` methods from the official [OmniDocBench-v1.5 repository](https://github.com/opendatalab/OmniDocBench).**
 """,  # noqa: E501
         dataset_id='evalscope/OmniDocBench_tsv',
-        metric_list={
-            'text_block': {
-                'metric': ['Edit_dist', 'BLEU', 'METEOR']
+        metric_list=[
+            {
+                'text_block': {
+                    'metric': ['Edit_dist', 'BLEU', 'METEOR']
+                }
             },
-            'display_formula': {
-                'metric': ['Edit_dist']
+            {
+                'display_formula': {
+                    'metric': ['Edit_dist']
+                }
             },
-            'table': {
-                'metric': ['TEDS', 'Edit_dist']
+            {
+                'table': {
+                    'metric': ['TEDS', 'Edit_dist']
+                }
             },
-            'reading_order': {
-                'metric': ['Edit_dist']
-            }
-        },
+            {
+                'reading_order': {
+                    'metric': ['Edit_dist']
+                }
+            },
+        ],
         eval_split='train',
         prompt_template=PROMPT_TEMPLATE,
         extra_params={
@@ -96,9 +104,7 @@ class OmniDocBenchAdapter(VisionLanguageAdapter):
         content_list: List[Content] = [ContentText(text=self.prompt_template)]
         content_list.append(ContentImage(image=f'data:image/png;base64,{record["image"]}'))
 
-        return Sample(
-            input=[ChatMessageUser(content=content_list)], target='', metadata=ast.literal_eval(record['answer'])
-        )
+        return Sample(input=[ChatMessageUser(content=content_list)], target='', metadata=json.loads(record['answer']))
 
     def match_score(self, original_prediction, filtered_prediction, reference, task_state) -> Score:
         # Dummy implementation to comply with the interface
@@ -119,10 +125,15 @@ class OmniDocBenchAdapter(VisionLanguageAdapter):
         predictions = [s.score.prediction for s in sample_scores]
         references = [s.sample_metadata for s in sample_scores]
 
+        metric_dict = {
+            metric_name: metric_params
+            for metric in self.metric_list
+            for metric_name, metric_params in metric.items()
+        }
         evaluator = End2EndEvaluator(
             prediction=predictions,
             reference=references,
-            metrics=self.metric_list,
+            metrics=metric_dict,
             match_method=self.match_method,
         )
         agg_results = evaluator.score()

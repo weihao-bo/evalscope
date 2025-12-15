@@ -52,6 +52,7 @@
 | `maritime_bench` | [MaritimeBench](#maritimebench) | `Chinese`, `Knowledge`, `MCQ` |
 | `math_500` | [MATH-500](#math-500) | `Math`, `Reasoning` |
 | `math_qa` | [MathQA](#mathqa) | `MCQ`, `Math`, `Reasoning` |
+| `mbpp` | [MBPP](#mbpp) | `Coding` |
 | `med_mcqa` | [Med-MCQA](#med-mcqa) | `Knowledge`, `MCQ` |
 | `mgsm` | [MGSM](#mgsm) | `Math`, `MultiLingual`, `Reasoning` |
 | `minerva_math` | [Minerva-Math](#minerva-math) | `Math`, `Reasoning` |
@@ -62,6 +63,8 @@
 | `mmlu_redux` | [MMLU-Redux](#mmlu-redux) | `Knowledge`, `MCQ` |
 | `mri_mcqa` | [MRI-MCQA](#mri-mcqa) | `Knowledge`, `MCQ`, `Medical` |
 | `multi_if` | [Multi-IF](#multi-if) | `InstructionFollowing`, `MultiLingual`, `MultiTurn` |
+| `multiple_humaneval` | [MultiPL-E HumanEval](#multipl-e-humaneval) | `Coding` |
+| `multiple_mbpp` | [MultiPL-E MBPP](#multipl-e-mbpp) | `Coding` |
 | `music_trivia` | [MusicTrivia](#musictrivia) | `Knowledge`, `MCQ` |
 | `musr` | [MuSR](#musr) | `MCQ`, `Reasoning` |
 | `needle_haystack` | [Needle-in-a-Haystack](#needle-in-a-haystack) | `LongContext`, `Retrieval` |
@@ -104,6 +107,7 @@
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 是
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `default`
 
 - **额外参数**: 
@@ -153,6 +157,7 @@ END QUESTION
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `train`
 - **数据集子集**: `default`
 
 - **提示模板**:
@@ -179,6 +184,7 @@ Please reason step by step, and put your final answer within \boxed{{}}.
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `AIME2025-II`, `AIME2025-I`
 
 - **提示模板**:
@@ -209,6 +215,7 @@ Remember to put your answer inside \boxed{{}}.
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 是
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `eval`
 - **数据集子集**: `alpaca_eval_gpt4_baseline`
 
 - **提示模板**:
@@ -260,6 +267,7 @@ Please reason step by step, and put your final answer within \boxed{{}}.
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `ARC-Challenge`, `ARC-Easy`
 
 - **提示模板**:
@@ -289,6 +297,7 @@ Answer the following multiple choice question. The entire content of your respon
 - **聚合方法**: `elo`
 - **是否需要LLM Judge**: 是
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `default`
 
 - **提示模板**:
@@ -314,6 +323,7 @@ Answer the following multiple choice question. The entire content of your respon
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 3-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `boolean_expressions`, `causal_judgement`, `date_understanding`, `disambiguation_qa`, `dyck_languages`, `formal_fallacies`, `geometric_shapes`, `hyperbaton`, `logical_deduction_five_objects`, `logical_deduction_seven_objects`, `logical_deduction_three_objects`, `movie_recommendation`, `multistep_arithmetic_two`, `navigate`, `object_counting`, `penguins_in_a_table`, `reasoning_about_colored_objects`, `ruin_names`, `salient_translation_error_detection`, `snarks`, `sports_understanding`, `temporal_sequences`, `tracking_shuffled_objects_five_objects`, `tracking_shuffled_objects_seven_objects`, `tracking_shuffled_objects_three_objects`, `web_of_lies`, `word_sorting`
 
 - **提示模板**:
@@ -341,6 +351,7 @@ A: Let's think step by step. Put your final answer in the format of "So the answ
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `default`
 
 - **提示模板**:
@@ -370,6 +381,7 @@ Answer the following multiple choice question. The entire content of your respon
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 5-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `default`
 
 - **提示模板**:
@@ -416,6 +428,7 @@ Text to process:
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 5-shot
+- **评测数据集划分**: `val`
 - **数据集子集**: `accountant`, `advanced_mathematics`, `art_studies`, `basic_medicine`, `business_administration`, `chinese_language_and_literature`, `civil_servant`, `clinical_medicine`, `college_chemistry`, `college_economics`, `college_physics`, `college_programming`, `computer_architecture`, `computer_network`, `discrete_mathematics`, `education_science`, `electrical_engineer`, `environmental_impact_assessment_engineer`, `fire_engineer`, `high_school_biology`, `high_school_chemistry`, `high_school_chinese`, `high_school_geography`, `high_school_history`, `high_school_mathematics`, `high_school_physics`, `high_school_politics`, `ideological_and_moral_cultivation`, `law`, `legal_professional`, `logic`, `mao_zedong_thought`, `marxism`, `metrology_engineer`, `middle_school_biology`, `middle_school_chemistry`, `middle_school_geography`, `middle_school_history`, `middle_school_mathematics`, `middle_school_physics`, `middle_school_politics`, `modern_chinese_history`, `operating_system`, `physician`, `plant_protection`, `probability_and_statistics`, `professional_tour_guide`, `sports_science`, `tax_accountant`, `teacher_qualification`, `urban_and_rural_planner`, `veterinary_medicine`
 
 - **提示模板**:
@@ -446,6 +459,7 @@ Text to process:
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 是
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `train`
 - **数据集子集**: `中华文化`, `人文与社会科学`, `工程、技术与应用科学`, `生活、艺术与文化`, `社会`, `自然与自然科学`
 
 - **提示模板**:
@@ -473,6 +487,7 @@ Text to process:
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `agronomy`, `anatomy`, `ancient_chinese`, `arts`, `astronomy`, `business_ethics`, `chinese_civil_service_exam`, `chinese_driving_rule`, `chinese_food_culture`, `chinese_foreign_policy`, `chinese_history`, `chinese_literature`, `chinese_teacher_qualification`, `clinical_knowledge`, `college_actuarial_science`, `college_education`, `college_engineering_hydrology`, `college_law`, `college_mathematics`, `college_medical_statistics`, `college_medicine`, `computer_science`, `computer_security`, `conceptual_physics`, `construction_project_management`, `economics`, `education`, `electrical_engineering`, `elementary_chinese`, `elementary_commonsense`, `elementary_information_and_technology`, `elementary_mathematics`, `ethnology`, `food_science`, `genetics`, `global_facts`, `high_school_biology`, `high_school_chemistry`, `high_school_geography`, `high_school_mathematics`, `high_school_physics`, `high_school_politics`, `human_sexuality`, `international_law`, `journalism`, `jurisprudence`, `legal_and_moral_basis`, `logical`, `machine_learning`, `management`, `marketing`, `marxist_theory`, `modern_chinese`, `nutrition`, `philosophy`, `professional_accounting`, `professional_law`, `professional_medicine`, `professional_psychology`, `public_relations`, `security_study`, `sociology`, `sports_science`, `traditional_chinese_medicine`, `virology`, `world_history`, `world_religions`
 
 - **提示模板**:
@@ -503,6 +518,7 @@ Text to process:
 - **聚合方法**: `f1`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `default`
 
 - **提示模板**:
@@ -536,6 +552,7 @@ Reasoning:
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `validation`
 - **数据集子集**: `default`
 
 - **提示模板**:
@@ -565,6 +582,7 @@ Answer the following multiple choice question. The entire content of your respon
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 4-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `Level 1`, `Level 2`, `Level 3`, `Level 4`, `Level 5`
 
 - **提示模板**:
@@ -594,6 +612,7 @@ Please reason step by step, and put your final answer within \boxed{{}}.
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 5-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `default`
 
 - **提示模板**:
@@ -640,6 +659,7 @@ Text to process:
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 5-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `default`
 
 - **提示模板**:
@@ -686,6 +706,7 @@ Text to process:
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 5-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `ai`, `literature`, `music`, `politics`, `science`
 
 - **提示模板**:
@@ -732,6 +753,7 @@ Text to process:
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `default`
 
 
@@ -749,6 +771,7 @@ Text to process:
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 是
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `complong_testmini`, `compshort_testmini`, `simplong_testmini`, `simpshort_testmini`
 
 - **提示模板**:
@@ -782,6 +805,7 @@ Format your response as follows: "Therefore, the answer is (insert answer here)"
 - **聚合方法**: `f1`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `binary-classification`
 
 - **提示模板**:
@@ -807,6 +831,7 @@ Format your response as follows: "Therefore, the answer is (insert answer here)"
 - **聚合方法**: `f1_weighted`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `multi-label-classification`
 
 - **提示模板**:
@@ -832,6 +857,7 @@ Format your response as follows: "Therefore, the answer is (insert answer here)"
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `multiple-choice-english-easy`, `multiple-choice-english-hard`
 
 - **提示模板**:
@@ -858,10 +884,11 @@ The entire content of your response should be of the following format: 'ANSWER: 
 - **数据集介绍**:
   > Drivelology，一种独特的语言现象，表现为“有深度的 nonsense”——语法上连贯，但在语用上充满悖论、情感强烈或具有修辞性颠覆意味的言语。
 - **任务类别**: `Knowledge`, `Reasoning`
-- **评估指标**: `bert_score`, `gpt_score`
+- **评估指标**: `{'bert_score': {'model_id_or_path': 'AI-ModelScope/roberta-large', 'model_type': 'roberta-large'}}`, `{'gpt_score': {}}`
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 是
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `narrative-writing-english`
 
 - **提示模板**:
@@ -891,6 +918,7 @@ Text: {text}
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 3-shot
+- **评测数据集划分**: `validation`
 - **数据集子集**: `default`
 
 - **提示模板**:
@@ -922,6 +950,7 @@ Think step by step, then write a line of the form "Answer: [ANSWER]" at the end 
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `validation`
 - **数据集子集**: `default`
 
 - **提示模板**:
@@ -947,6 +976,7 @@ Think step by step, then write a line of the form "Answer: [ANSWER]" at the end 
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 是
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `default`
 
 - **提示模板**:
@@ -980,6 +1010,7 @@ Format your response as follows: "Therefore, the answer is (insert answer here)"
 - **聚合方法**: `elo`
 - **是否需要LLM Judge**: 是
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `default`
 
 - **额外参数**: 
@@ -1064,6 +1095,7 @@ Example output: "My final verdict is tie: [[A=B]]".
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `val`
 - **数据集子集**: `default`
 
 - **提示模板**:
@@ -1094,6 +1126,7 @@ Example output: "My final verdict is tie: [[A=B]]".
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `default`
 
 - **提示模板**:
@@ -1120,6 +1153,7 @@ Example output: "My final verdict is tie: [[A=B]]".
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 5-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `default`
 
 - **提示模板**:
@@ -1166,6 +1200,7 @@ Text to process:
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `train`
 - **数据集子集**: `default`
 
 - **提示模板**:
@@ -1195,6 +1230,7 @@ Answer the following multiple choice question. The last line of your response sh
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 4-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `main`
 
 - **提示模板**:
@@ -1221,6 +1257,7 @@ Please reason step by step, and put your final answer within \boxed{{}}.
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `data`
 - **数据集子集**: `dialogue_samples`, `qa_samples`, `summarization_samples`
 
 - **提示模板**:
@@ -1246,6 +1283,7 @@ Please reason step by step, and put your final answer within \boxed{{}}.
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 5-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `default`
 
 - **提示模板**:
@@ -1292,6 +1330,7 @@ Text to process:
 - **聚合方法**: `clipped_mean`
 - **是否需要LLM Judge**: 是
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `communication`, `complex_responses`, `context_seeking`, `emergency_referrals`, `global_health`, `health_data_tasks`, `hedging`
 
 - **额外参数**: 
@@ -1334,6 +1373,7 @@ Answer the question:
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `validation`
 - **数据集子集**: `default`
 
 - **提示模板**:
@@ -1364,6 +1404,7 @@ Answer the following multiple choice question. The entire content of your respon
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 是
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `Biology/Medicine`, `Chemistry`, `Computer Science/AI`, `Engineering`, `Humanities/Social Science`, `Math`, `Other`, `Physics`
 
 - **额外参数**: 
@@ -1395,10 +1436,11 @@ Answer the following multiple choice question. The entire content of your respon
 - **数据集介绍**:
   > HumanEval 是一个基准测试，用于评估代码生成模型根据给定规范编写 Python 函数的能力。它包含一系列具有明确定义输入输出行为的编程任务。**默认情况下，代码在本地环境中执行。我们建议使用沙箱执行以安全地运行和评估生成的代码，请参考[文档](https://evalscope.readthedocs.io/zh-cn/latest/user_guides/sandbox.html)了解详情。**
 - **任务类别**: `Coding`
-- **评估指标**: 
+- **评估指标**: `acc`
 - **聚合方法**: `mean_and_pass_at_k`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `openai_humaneval`
 
 - **评测超时时间（秒）**: 4
@@ -1436,6 +1478,7 @@ Read the following function signature and docstring, and fully implement the fun
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `train`
 - **数据集子集**: `default`
 
 
@@ -1453,6 +1496,7 @@ Read the following function signature and docstring, and fully implement the fun
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `train`
 - **数据集子集**: `default`
 
 
@@ -1470,6 +1514,7 @@ Read the following function signature and docstring, and fully implement the fun
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `EQ`, `IQ`
 
 - **提示模板**:
@@ -1496,10 +1541,11 @@ Read the following function signature and docstring, and fully implement the fun
 - **数据集介绍**:
   > Live Code Bench 是一个用于评估代码生成模型在真实编程任务中表现的基准测试，包含多种编程题目及测试用例，用以衡量模型生成正确且高效代码的能力。**默认情况下代码在本地环境中执行。我们建议使用沙箱执行以安全地运行和评估生成的代码，请参考[文档](https://evalscope.readthedocs.io/zh-cn/latest/user_guides/sandbox.html)了解详情。**
 - **任务类别**: `Coding`
-- **评估指标**: 
+- **评估指标**: `acc`
 - **聚合方法**: `mean_and_pass_at_k`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `release_latest`
 
 - **评测超时时间（秒）**: 6
@@ -1561,6 +1607,7 @@ Read the following function signature and docstring, and fully implement the fun
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `default`
 
 - **提示模板**:
@@ -1590,6 +1637,7 @@ Answer the following multiple choice question. The entire content of your respon
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `default`
 
 - **提示模板**:
@@ -1627,6 +1675,7 @@ D. 扭应力
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `Level 1`, `Level 2`, `Level 3`, `Level 4`, `Level 5`
 
 - **提示模板**:
@@ -1653,6 +1702,7 @@ Please reason step by step, and put your final answer within \boxed{{}}.
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `default`
 
 - **提示模板**:
@@ -1664,6 +1714,45 @@ Answer the following multiple choice question. The last line of your response sh
 {question}
 
 {choices}
+````
+
+</details>
+
+---
+
+### MBPP
+
+[返回目录](#llm评测集)
+- **数据集名称**: `mbpp`
+- **数据集ID**: [google-research-datasets/mbpp](https://modelscope.cn/datasets/google-research-datasets/mbpp/summary)
+- **数据集介绍**:
+  > MBPP（基础Python问题数据集）：该基准包含约1,000个众包的Python编程问题，旨在供初级程序员解决，涵盖编程基础、标准库功能等内容。每个问题包括任务描述、代码解答和3个自动化测试用例。**执行时需使用沙箱环境以安全地运行和评估生成的代码，请参考[文档](https://evalscope.readthedocs.io/zh-cn/latest/user_guides/sandbox.html)了解详情。**
+- **任务类别**: `Coding`
+- **评估指标**: `acc`
+- **聚合方法**: `mean_and_pass_at_k`
+- **是否需要LLM Judge**: 否
+- **默认提示方式**: 3-shot
+- **评测数据集划分**: `test`
+- **数据集子集**: `full`
+
+- **评测超时时间（秒）**: 20
+- **沙箱配置**: 
+```json
+{
+    "image": "python:3.11-slim",
+    "tools_config": {
+        "shell_executor": {},
+        "python_executor": {}
+    }
+}
+```
+- **提示模板**:
+<details><summary>View</summary>
+
+````text
+You are an expert Python programmer, and here is your task: {question} Your code should pass these tests:
+
+{tests}
 ````
 
 </details>
@@ -1682,6 +1771,7 @@ Answer the following multiple choice question. The last line of your response sh
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `validation`
 - **数据集子集**: `default`
 
 - **提示模板**:
@@ -1711,6 +1801,7 @@ Answer the following multiple choice question. The entire content of your respon
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 4-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `bn`, `de`, `en`, `es`, `fr`, `ja`, `ru`, `sw`, `te`, `th`, `zh`
 
 - **提示模板**:
@@ -1739,6 +1830,7 @@ Please reason step by step, and put your final answer within \boxed{{}}.
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 是
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `train`
 - **数据集子集**: `default`
 
 - **提示模板**:
@@ -1765,6 +1857,7 @@ Please reason step by step, and put your final answer within \boxed{{}}.
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 5-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `default`
 
 - **提示模板**:
@@ -1811,6 +1904,7 @@ Text to process:
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 5-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `default`
 
 - **提示模板**:
@@ -1857,6 +1951,7 @@ Text to process:
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 5-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `abstract_algebra`, `anatomy`, `astronomy`, `business_ethics`, `clinical_knowledge`, `college_biology`, `college_chemistry`, `college_computer_science`, `college_mathematics`, `college_medicine`, `college_physics`, `computer_security`, `conceptual_physics`, `econometrics`, `electrical_engineering`, `elementary_mathematics`, `formal_logic`, `global_facts`, `high_school_biology`, `high_school_chemistry`, `high_school_computer_science`, `high_school_european_history`, `high_school_geography`, `high_school_government_and_politics`, `high_school_macroeconomics`, `high_school_mathematics`, `high_school_microeconomics`, `high_school_physics`, `high_school_psychology`, `high_school_statistics`, `high_school_us_history`, `high_school_world_history`, `human_aging`, `human_sexuality`, `international_law`, `jurisprudence`, `logical_fallacies`, `machine_learning`, `management`, `marketing`, `medical_genetics`, `miscellaneous`, `moral_disputes`, `moral_scenarios`, `nutrition`, `philosophy`, `prehistory`, `professional_accounting`, `professional_law`, `professional_medicine`, `professional_psychology`, `public_relations`, `security_studies`, `sociology`, `us_foreign_policy`, `virology`, `world_religions`
 
 - **提示模板**:
@@ -1886,6 +1981,7 @@ Answer the following multiple choice question. The last line of your response sh
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 5-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `biology`, `business`, `chemistry`, `computer science`, `economics`, `engineering`, `health`, `history`, `law`, `math`, `other`, `philosophy`, `physics`, `psychology`
 
 - **提示模板**:
@@ -1917,6 +2013,7 @@ Options:
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `abstract_algebra`, `anatomy`, `astronomy`, `business_ethics`, `clinical_knowledge`, `college_biology`, `college_chemistry`, `college_computer_science`, `college_mathematics`, `college_medicine`, `college_physics`, `computer_security`, `conceptual_physics`, `econometrics`, `electrical_engineering`, `elementary_mathematics`, `formal_logic`, `global_facts`, `high_school_biology`, `high_school_chemistry`, `high_school_computer_science`, `high_school_european_history`, `high_school_geography`, `high_school_government_and_politics`, `high_school_macroeconomics`, `high_school_mathematics`, `high_school_microeconomics`, `high_school_physics`, `high_school_psychology`, `high_school_statistics`, `high_school_us_history`, `high_school_world_history`, `human_aging`, `human_sexuality`, `international_law`, `jurisprudence`, `logical_fallacies`, `machine_learning`, `management`, `marketing`, `medical_genetics`, `miscellaneous`, `moral_disputes`, `moral_scenarios`, `nutrition`, `philosophy`, `prehistory`, `professional_accounting`, `professional_law`, `professional_medicine`, `professional_psychology`, `public_relations`, `security_studies`, `sociology`, `us_foreign_policy`, `virology`, `world_religions`
 
 - **提示模板**:
@@ -1946,6 +2043,7 @@ Answer the following multiple choice question. The last line of your response sh
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `default`
 
 - **提示模板**:
@@ -1975,6 +2073,7 @@ Answer the following multiple choice question. The entire content of your respon
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `train`
 - **数据集子集**: `Chinese`, `English`, `French`, `German`, `Hindi`, `Italian`, `Portuguese`, `Russian`, `Spanish`, `Thai`, `Vietnamese`
 
 - **额外参数**: 
@@ -1995,6 +2094,86 @@ Answer the following multiple choice question. The entire content of your respon
 
 ---
 
+### MultiPL-E HumanEval
+
+[返回目录](#llm评测集)
+- **数据集名称**: `multiple_humaneval`
+- **数据集ID**: [evalscope/MultiPL-E](https://modelscope.cn/datasets/evalscope/MultiPL-E/summary)
+- **数据集介绍**:
+  > 该多语言 HumanEval 来自 MultiPL-E，已实现并测试了 18 种语言。**执行和评估生成代码需要沙箱环境，更多详情请参考[文档](https://evalscope.readthedocs.io/zh-cn/latest/user_guides/sandbox.html)。**
+- **任务类别**: `Coding`
+- **评估指标**: `acc`
+- **聚合方法**: `mean_and_pass_at_k`
+- **是否需要LLM Judge**: 否
+- **默认提示方式**: 0-shot
+- **评测数据集划分**: `test`
+- **数据集子集**: `humaneval-cpp`, `humaneval-cs`, `humaneval-d`, `humaneval-go`, `humaneval-java`, `humaneval-jl`, `humaneval-js`, `humaneval-lua`, `humaneval-php`, `humaneval-pl`, `humaneval-r`, `humaneval-rb`, `humaneval-rkt`, `humaneval-rs`, `humaneval-scala`, `humaneval-sh`, `humaneval-swift`, `humaneval-ts`
+
+- **评测超时时间（秒）**: 30
+- **沙箱配置**: 
+```json
+{
+    "image": "volcengine/sandbox-fusion:server-20250609",
+    "tools_config": {
+        "shell_executor": {},
+        "python_executor": {},
+        "multi_code_executor": {}
+    },
+    "memory_limit": "2g",
+    "cpu_limit": "2.0"
+}
+```
+- **提示模板**:
+<details><summary>View</summary>
+
+````text
+{prompt}
+````
+
+</details>
+
+---
+
+### MultiPL-E MBPP
+
+[返回目录](#llm评测集)
+- **数据集名称**: `multiple_mbpp`
+- **数据集ID**: [evalscope/MultiPL-E](https://modelscope.cn/datasets/evalscope/MultiPL-E/summary)
+- **数据集介绍**:
+  > 此多语言 MBPP 来自 MultiPL-E，已实现并测试了 18 种语言。**执行时需要沙箱环境以安全运行和评估生成的代码，请参考[文档](https://evalscope.readthedocs.io/zh-cn/latest/user_guides/sandbox.html)了解详情。**
+- **任务类别**: `Coding`
+- **评估指标**: `acc`
+- **聚合方法**: `mean_and_pass_at_k`
+- **是否需要LLM Judge**: 否
+- **默认提示方式**: 0-shot
+- **评测数据集划分**: `test`
+- **数据集子集**: `mbpp-cpp`, `mbpp-cs`, `mbpp-d`, `mbpp-go`, `mbpp-java`, `mbpp-jl`, `mbpp-js`, `mbpp-lua`, `mbpp-php`, `mbpp-pl`, `mbpp-r`, `mbpp-rb`, `mbpp-rkt`, `mbpp-rs`, `mbpp-scala`, `mbpp-sh`, `mbpp-swift`, `mbpp-ts`
+
+- **评测超时时间（秒）**: 30
+- **沙箱配置**: 
+```json
+{
+    "image": "volcengine/sandbox-fusion:server-20250609",
+    "tools_config": {
+        "shell_executor": {},
+        "python_executor": {},
+        "multi_code_executor": {}
+    },
+    "memory_limit": "2g",
+    "cpu_limit": "2.0"
+}
+```
+- **提示模板**:
+<details><summary>View</summary>
+
+````text
+{prompt}
+````
+
+</details>
+
+---
+
 ### MusicTrivia
 
 [返回目录](#llm评测集)
@@ -2007,6 +2186,7 @@ Answer the following multiple choice question. The entire content of your respon
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `default`
 
 - **提示模板**:
@@ -2036,6 +2216,7 @@ Answer the following multiple choice question. The entire content of your respon
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `murder_mysteries`, `object_placements`, `team_allocation`
 
 - **提示模板**:
@@ -2065,6 +2246,7 @@ Answer the following multiple choice question. The last line of your response sh
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 是
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `chinese`, `english`
 
 - **额外参数**: 
@@ -2165,6 +2347,7 @@ Don't give information outside the document or repeat your findings.
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 5-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `default`
 
 - **提示模板**:
@@ -2211,6 +2394,7 @@ Text to process:
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `train`
 - **数据集子集**: `default`
 
 - **额外参数**: 
@@ -2248,6 +2432,7 @@ Text to process:
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `validation`
 - **数据集子集**: `default`
 
 - **提示模板**:
@@ -2277,6 +2462,7 @@ Answer the following multiple choice question. The entire content of your respon
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `ar`, `bn`, `de`, `en`, `es`, `fr`, `id`, `it`, `ja`, `ko`, `ms`, `pt`, `ru`, `sw`, `te`, `th`, `vi`, `zh`
 
 - **提示模板**:
@@ -2302,6 +2488,7 @@ Answer the following multiple choice question. The entire content of your respon
 - **聚合方法**: `f1`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `gsm8k`, `math`, `olympiadbench`, `omnimath`
 
 - **提示模板**:
@@ -2340,6 +2527,7 @@ Please put your final answer (i.e., the index) in oxed{{}}.
 - **聚合方法**: `f1`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `default`
 
 - **提示模板**:
@@ -2366,6 +2554,7 @@ Please answer YES or NO or MAYBE without an explanation.
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `validation`
 - **数据集子集**: `default`
 
 - **提示模板**:
@@ -2395,6 +2584,7 @@ Answer the following multiple choice question. The entire content of your respon
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 3-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `high`, `middle`
 
 - **提示模板**:
@@ -2424,6 +2614,7 @@ Answer the following multiple choice question. The last line of your response sh
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `default`
 
 - **评测超时时间（秒）**: 300
@@ -2521,6 +2712,7 @@ Example:
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `default`
 
 - **提示模板**:
@@ -2550,6 +2742,7 @@ Answer the following multiple choice question. The entire content of your respon
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 是
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `default`
 
 - **提示模板**:
@@ -2577,6 +2770,7 @@ Answer the question:
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `validation`
 - **数据集子集**: `default`
 
 - **提示模板**:
@@ -2600,12 +2794,13 @@ Answer the following multiple choice question. The entire content of your respon
 - **数据集名称**: `super_gpqa`
 - **数据集ID**: [m-a-p/SuperGPQA](https://modelscope.cn/datasets/m-a-p/SuperGPQA/summary)
 - **数据集介绍**:
-  > SuperGPQA 是一个大规模多项选择题问答数据集，旨在评估模型在不同领域的泛化能力。它包含来自 50 多个领域的 10 万多个问题，每个问题有 10 个选项。
+  > SuperGPQA 是一个大规模的多项选择题问答数据集，旨在评估模型在不同领域的泛化能力。它包含来自 50 多个领域的 26,000 多道题目，每道题有 10 个选项。
 - **任务类别**: `Knowledge`, `MCQ`
 - **评估指标**: `acc`
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `train`
 - **数据集子集**: `Aeronautical and Astronautical Science and Technology`, `Agricultural Engineering`, `Animal Husbandry`, `Applied Economics`, `Aquaculture`, `Architecture`, `Art Studies`, `Astronomy`, `Atmospheric Science`, `Basic Medicine`, `Biology`, `Business Administration`, `Chemical Engineering and Technology`, `Chemistry`, `Civil Engineering`, `Clinical Medicine`, `Computer Science and Technology`, `Control Science and Engineering`, `Crop Science`, `Education`, `Electrical Engineering`, `Electronic Science and Technology`, `Environmental Science and Engineering`, `Food Science and Engineering`, `Forestry Engineering`, `Forestry`, `Geography`, `Geological Resources and Geological Engineering`, `Geology`, `Geophysics`, `History`, `Hydraulic Engineering`, `Information and Communication Engineering`, `Instrument Science and Technology`, `Journalism and Communication`, `Language and Literature`, `Law`, `Library, Information and Archival Management`, `Management Science and Engineering`, `Materials Science and Engineering`, `Mathematics`, `Mechanical Engineering`, `Mechanics`, `Metallurgical Engineering`, `Military Science`, `Mining Engineering`, `Musicology`, `Naval Architecture and Ocean Engineering`, `Nuclear Science and Technology`, `Oceanography`, `Optical Engineering`, `Petroleum and Natural Gas Engineering`, `Pharmacy`, `Philosophy`, `Physical Education`, `Physical Oceanography`, `Physics`, `Political Science`, `Power Engineering and Engineering Thermophysics`, `Psychology`, `Public Administration`, `Public Health and Preventive Medicine`, `Sociology`, `Stomatology`, `Surveying and Mapping Science and Technology`, `Systems Science`, `Textile Science and Engineering`, `Theoretical Economics`, `Traditional Chinese Medicine`, `Transportation Engineering`, `Veterinary Medicine`, `Weapon Science and Technology`
 
 - **提示模板**:
@@ -2635,6 +2830,7 @@ Answer the following multiple choice question. The last line of your response sh
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `default`
 
 - **额外参数**: 
@@ -2680,6 +2876,7 @@ Answer the following multiple choice question. The last line of your response sh
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `default`
 
 - **额外参数**: 
@@ -2725,6 +2922,7 @@ Answer the following multiple choice question. The last line of your response sh
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `default`
 
 - **额外参数**: 
@@ -2770,6 +2968,7 @@ Answer the following multiple choice question. The last line of your response sh
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `validation`
 - **数据集子集**: `rc.wikipedia`
 
 - **提示模板**:
@@ -2802,6 +3001,7 @@ Keep your The last line of your response should be of the form "ANSWER: [ANSWER]
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `validation`
 - **数据集子集**: `multiple_choice`
 
 - **额外参数**: 
@@ -2841,6 +3041,7 @@ Answer the following multiple choice question. The entire content of your respon
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `validation`
 - **数据集子集**: `default`
 
 - **提示模板**:
@@ -2866,10 +3067,11 @@ Answer the following multiple choice question. The entire content of your respon
 - **数据集介绍**:
   > WMT2024新闻翻译基准，支持多种语言对，每个子集代表一个特定的翻译方向。
 - **任务类别**: `MachineTranslation`, `MultiLingual`
-- **评估指标**: `bert_score`, `bleu`, `comet`
+- **评估指标**: `{'bert_score': {'model_id_or_path': 'AI-ModelScope/xlm-roberta-large', 'model_type': 'xlm-roberta-large'}}`, `{'bleu': {}}`, `{'comet': {'model_id_or_path': 'evalscope/wmt22-comet-da'}}`
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `en-ar_eg`, `en-ar_sa`, `en-bg_bg`, `en-bn_in`, `en-ca_es`, `en-cs_cz`, `en-da_dk`, `en-de_de`, `en-el_gr`, `en-es_mx`, `en-et_ee`, `en-fa_ir`, `en-fi_fi`, `en-fil_ph`, `en-fr_ca`, `en-fr_fr`, `en-gu_in`, `en-he_il`, `en-hi_in`, `en-hr_hr`, `en-hu_hu`, `en-id_id`, `en-is_is`, `en-it_it`, `en-ja_jp`, `en-kn_in`, `en-ko_kr`, `en-lt_lt`, `en-lv_lv`, `en-ml_in`, `en-mr_in`, `en-nl_nl`, `en-no_no`, `en-pa_in`, `en-pl_pl`, `en-pt_br`, `en-pt_pt`, `en-ro_ro`, `en-ru_ru`, `en-sk_sk`, `en-sl_si`, `en-sr_rs`, `en-sv_se`, `en-sw_ke`, `en-sw_tz`, `en-ta_in`, `en-te_in`, `en-th_th`, `en-tr_tr`, `en-uk_ua`, `en-ur_pk`, `en-vi_vn`, `en-zh_cn`, `en-zh_tw`, `en-zu_za`
 
 - **提示模板**:
@@ -2898,6 +3100,7 @@ Translate the following {source_language} sentence into {target_language}:
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 5-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `default`
 
 - **提示模板**:
@@ -2944,6 +3147,7 @@ Text to process:
 - **聚合方法**: `mean`
 - **是否需要LLM Judge**: 否
 - **默认提示方式**: 0-shot
+- **评测数据集划分**: `test`
 - **数据集子集**: `grid_mode`
 
 - **提示模板**:

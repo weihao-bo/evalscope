@@ -52,6 +52,7 @@ Below is the list of supported LLM benchmarks. Click on a benchmark name to jump
 | `maritime_bench` | [MaritimeBench](#maritimebench) | `Chinese`, `Knowledge`, `MCQ` |
 | `math_500` | [MATH-500](#math-500) | `Math`, `Reasoning` |
 | `math_qa` | [MathQA](#mathqa) | `MCQ`, `Math`, `Reasoning` |
+| `mbpp` | [MBPP](#mbpp) | `Coding` |
 | `med_mcqa` | [Med-MCQA](#med-mcqa) | `Knowledge`, `MCQ` |
 | `mgsm` | [MGSM](#mgsm) | `Math`, `MultiLingual`, `Reasoning` |
 | `minerva_math` | [Minerva-Math](#minerva-math) | `Math`, `Reasoning` |
@@ -62,6 +63,8 @@ Below is the list of supported LLM benchmarks. Click on a benchmark name to jump
 | `mmlu_redux` | [MMLU-Redux](#mmlu-redux) | `Knowledge`, `MCQ` |
 | `mri_mcqa` | [MRI-MCQA](#mri-mcqa) | `Knowledge`, `MCQ`, `Medical` |
 | `multi_if` | [Multi-IF](#multi-if) | `InstructionFollowing`, `MultiLingual`, `MultiTurn` |
+| `multiple_humaneval` | [MultiPL-E HumanEval](#multipl-e-humaneval) | `Coding` |
+| `multiple_mbpp` | [MultiPL-E MBPP](#multipl-e-mbpp) | `Coding` |
 | `music_trivia` | [MusicTrivia](#musictrivia) | `Knowledge`, `MCQ` |
 | `musr` | [MuSR](#musr) | `MCQ`, `Reasoning` |
 | `needle_haystack` | [Needle-in-a-Haystack](#needle-in-a-haystack) | `LongContext`, `Retrieval` |
@@ -104,6 +107,7 @@ Below is the list of supported LLM benchmarks. Click on a benchmark name to jump
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: Yes
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `default`
 
 - **Extra Parameters**: 
@@ -153,6 +157,7 @@ END QUESTION
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `train`
 - **Subsets**: `default`
 
 - **Prompt Template**:
@@ -179,6 +184,7 @@ Please reason step by step, and put your final answer within \boxed{{}}.
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `AIME2025-II`, `AIME2025-I`
 
 - **Prompt Template**:
@@ -209,6 +215,7 @@ Remember to put your answer inside \boxed{{}}.
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: Yes
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `eval`
 - **Subsets**: `alpaca_eval_gpt4_baseline`
 
 - **Prompt Template**:
@@ -260,6 +267,7 @@ Please reason step by step, and put your final answer within \boxed{{}}.
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `ARC-Challenge`, `ARC-Easy`
 
 - **Prompt Template**:
@@ -289,6 +297,7 @@ Answer the following multiple choice question. The entire content of your respon
 - **Aggregation Methods**: `elo`
 - **Requires LLM Judge**: Yes
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `default`
 
 - **Prompt Template**:
@@ -314,6 +323,7 @@ Answer the following multiple choice question. The entire content of your respon
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 3-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `boolean_expressions`, `causal_judgement`, `date_understanding`, `disambiguation_qa`, `dyck_languages`, `formal_fallacies`, `geometric_shapes`, `hyperbaton`, `logical_deduction_five_objects`, `logical_deduction_seven_objects`, `logical_deduction_three_objects`, `movie_recommendation`, `multistep_arithmetic_two`, `navigate`, `object_counting`, `penguins_in_a_table`, `reasoning_about_colored_objects`, `ruin_names`, `salient_translation_error_detection`, `snarks`, `sports_understanding`, `temporal_sequences`, `tracking_shuffled_objects_five_objects`, `tracking_shuffled_objects_seven_objects`, `tracking_shuffled_objects_three_objects`, `web_of_lies`, `word_sorting`
 
 - **Prompt Template**:
@@ -341,6 +351,7 @@ A: Let's think step by step. Put your final answer in the format of "So the answ
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `default`
 
 - **Prompt Template**:
@@ -370,6 +381,7 @@ Answer the following multiple choice question. The entire content of your respon
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 5-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `default`
 
 - **Prompt Template**:
@@ -416,6 +428,7 @@ Text to process:
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 5-shot
+- **Evaluation Split**: `val`
 - **Subsets**: `accountant`, `advanced_mathematics`, `art_studies`, `basic_medicine`, `business_administration`, `chinese_language_and_literature`, `civil_servant`, `clinical_medicine`, `college_chemistry`, `college_economics`, `college_physics`, `college_programming`, `computer_architecture`, `computer_network`, `discrete_mathematics`, `education_science`, `electrical_engineer`, `environmental_impact_assessment_engineer`, `fire_engineer`, `high_school_biology`, `high_school_chemistry`, `high_school_chinese`, `high_school_geography`, `high_school_history`, `high_school_mathematics`, `high_school_physics`, `high_school_politics`, `ideological_and_moral_cultivation`, `law`, `legal_professional`, `logic`, `mao_zedong_thought`, `marxism`, `metrology_engineer`, `middle_school_biology`, `middle_school_chemistry`, `middle_school_geography`, `middle_school_history`, `middle_school_mathematics`, `middle_school_physics`, `middle_school_politics`, `modern_chinese_history`, `operating_system`, `physician`, `plant_protection`, `probability_and_statistics`, `professional_tour_guide`, `sports_science`, `tax_accountant`, `teacher_qualification`, `urban_and_rural_planner`, `veterinary_medicine`
 
 - **Prompt Template**:
@@ -446,6 +459,7 @@ Text to process:
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: Yes
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `train`
 - **Subsets**: `中华文化`, `人文与社会科学`, `工程、技术与应用科学`, `生活、艺术与文化`, `社会`, `自然与自然科学`
 
 - **Prompt Template**:
@@ -473,6 +487,7 @@ Text to process:
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `agronomy`, `anatomy`, `ancient_chinese`, `arts`, `astronomy`, `business_ethics`, `chinese_civil_service_exam`, `chinese_driving_rule`, `chinese_food_culture`, `chinese_foreign_policy`, `chinese_history`, `chinese_literature`, `chinese_teacher_qualification`, `clinical_knowledge`, `college_actuarial_science`, `college_education`, `college_engineering_hydrology`, `college_law`, `college_mathematics`, `college_medical_statistics`, `college_medicine`, `computer_science`, `computer_security`, `conceptual_physics`, `construction_project_management`, `economics`, `education`, `electrical_engineering`, `elementary_chinese`, `elementary_commonsense`, `elementary_information_and_technology`, `elementary_mathematics`, `ethnology`, `food_science`, `genetics`, `global_facts`, `high_school_biology`, `high_school_chemistry`, `high_school_geography`, `high_school_mathematics`, `high_school_physics`, `high_school_politics`, `human_sexuality`, `international_law`, `journalism`, `jurisprudence`, `legal_and_moral_basis`, `logical`, `machine_learning`, `management`, `marketing`, `marxist_theory`, `modern_chinese`, `nutrition`, `philosophy`, `professional_accounting`, `professional_law`, `professional_medicine`, `professional_psychology`, `public_relations`, `security_study`, `sociology`, `sports_science`, `traditional_chinese_medicine`, `virology`, `world_history`, `world_religions`
 
 - **Prompt Template**:
@@ -503,6 +518,7 @@ Text to process:
 - **Aggregation Methods**: `f1`
 - **Requires LLM Judge**: No
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `default`
 
 - **Prompt Template**:
@@ -536,6 +552,7 @@ Reasoning:
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `validation`
 - **Subsets**: `default`
 
 - **Prompt Template**:
@@ -565,6 +582,7 @@ Answer the following multiple choice question. The entire content of your respon
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 4-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `Level 1`, `Level 2`, `Level 3`, `Level 4`, `Level 5`
 
 - **Prompt Template**:
@@ -594,6 +612,7 @@ Please reason step by step, and put your final answer within \boxed{{}}.
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 5-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `default`
 
 - **Prompt Template**:
@@ -640,6 +659,7 @@ Text to process:
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 5-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `default`
 
 - **Prompt Template**:
@@ -686,6 +706,7 @@ Text to process:
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 5-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `ai`, `literature`, `music`, `politics`, `science`
 
 - **Prompt Template**:
@@ -732,6 +753,7 @@ Text to process:
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `default`
 
 
@@ -749,6 +771,7 @@ Text to process:
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: Yes
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `complong_testmini`, `compshort_testmini`, `simplong_testmini`, `simpshort_testmini`
 
 - **Prompt Template**:
@@ -782,6 +805,7 @@ Format your response as follows: "Therefore, the answer is (insert answer here)"
 - **Aggregation Methods**: `f1`
 - **Requires LLM Judge**: No
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `binary-classification`
 
 - **Prompt Template**:
@@ -807,6 +831,7 @@ Format your response as follows: "Therefore, the answer is (insert answer here)"
 - **Aggregation Methods**: `f1_weighted`
 - **Requires LLM Judge**: No
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `multi-label-classification`
 
 - **Prompt Template**:
@@ -832,6 +857,7 @@ Format your response as follows: "Therefore, the answer is (insert answer here)"
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `multiple-choice-english-easy`, `multiple-choice-english-hard`
 
 - **Prompt Template**:
@@ -858,10 +884,11 @@ The entire content of your response should be of the following format: 'ANSWER: 
 - **Description**:
   > Drivelology, a unique linguistic phenomenon characterised as "nonsense with depth" - utterances that are syntactically coherent yet pragmatically paradoxical, emotionally loaded, or rhetorically subversive.
 - **Task Categories**: `Knowledge`, `Reasoning`
-- **Evaluation Metrics**: `bert_score`, `gpt_score`
+- **Evaluation Metrics**: `{'bert_score': {'model_id_or_path': 'AI-ModelScope/roberta-large', 'model_type': 'roberta-large'}}`, `{'gpt_score': {}}`
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: Yes
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `narrative-writing-english`
 
 - **Prompt Template**:
@@ -891,6 +918,7 @@ Text: {text}
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 3-shot
+- **Evaluation Split**: `validation`
 - **Subsets**: `default`
 
 - **Prompt Template**:
@@ -922,6 +950,7 @@ Think step by step, then write a line of the form "Answer: [ANSWER]" at the end 
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `validation`
 - **Subsets**: `default`
 
 - **Prompt Template**:
@@ -947,6 +976,7 @@ Think step by step, then write a line of the form "Answer: [ANSWER]" at the end 
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: Yes
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `default`
 
 - **Prompt Template**:
@@ -980,6 +1010,7 @@ Format your response as follows: "Therefore, the answer is (insert answer here)"
 - **Aggregation Methods**: `elo`
 - **Requires LLM Judge**: Yes
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `default`
 
 - **Extra Parameters**: 
@@ -1064,6 +1095,7 @@ Example output: "My final verdict is tie: [[A=B]]".
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `val`
 - **Subsets**: `default`
 
 - **Prompt Template**:
@@ -1094,6 +1126,7 @@ Example output: "My final verdict is tie: [[A=B]]".
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `default`
 
 - **Prompt Template**:
@@ -1120,6 +1153,7 @@ Example output: "My final verdict is tie: [[A=B]]".
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 5-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `default`
 
 - **Prompt Template**:
@@ -1166,6 +1200,7 @@ Text to process:
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `train`
 - **Subsets**: `default`
 
 - **Prompt Template**:
@@ -1195,6 +1230,7 @@ Answer the following multiple choice question. The last line of your response sh
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 4-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `main`
 
 - **Prompt Template**:
@@ -1221,6 +1257,7 @@ Please reason step by step, and put your final answer within \boxed{{}}.
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `data`
 - **Subsets**: `dialogue_samples`, `qa_samples`, `summarization_samples`
 
 - **Prompt Template**:
@@ -1246,6 +1283,7 @@ Please reason step by step, and put your final answer within \boxed{{}}.
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 5-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `default`
 
 - **Prompt Template**:
@@ -1292,6 +1330,7 @@ Text to process:
 - **Aggregation Methods**: `clipped_mean`
 - **Requires LLM Judge**: Yes
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `communication`, `complex_responses`, `context_seeking`, `emergency_referrals`, `global_health`, `health_data_tasks`, `hedging`
 
 - **Extra Parameters**: 
@@ -1334,6 +1373,7 @@ Answer the question:
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `validation`
 - **Subsets**: `default`
 
 - **Prompt Template**:
@@ -1364,6 +1404,7 @@ Answer the following multiple choice question. The entire content of your respon
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: Yes
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `Biology/Medicine`, `Chemistry`, `Computer Science/AI`, `Engineering`, `Humanities/Social Science`, `Math`, `Other`, `Physics`
 
 - **Extra Parameters**: 
@@ -1395,10 +1436,11 @@ Answer the following multiple choice question. The entire content of your respon
 - **Description**:
   > HumanEval is a benchmark for evaluating the ability of code generation models to write Python functions based on given specifications. It consists of programming tasks with a defined input-output behavior. **By default the code is executed in local environment. We recommend using sandbox execution to safely run and evaluate the generated code, please refer to the [documentation](https://evalscope.readthedocs.io/en/latest/user_guides/sandbox.html) for more details.**
 - **Task Categories**: `Coding`
-- **Evaluation Metrics**: 
+- **Evaluation Metrics**: `acc`
 - **Aggregation Methods**: `mean_and_pass_at_k`
 - **Requires LLM Judge**: No
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `openai_humaneval`
 
 - **Review Timeout (seconds)**: 4
@@ -1436,6 +1478,7 @@ Read the following function signature and docstring, and fully implement the fun
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `train`
 - **Subsets**: `default`
 
 
@@ -1453,6 +1496,7 @@ Read the following function signature and docstring, and fully implement the fun
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `train`
 - **Subsets**: `default`
 
 
@@ -1470,6 +1514,7 @@ Read the following function signature and docstring, and fully implement the fun
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `EQ`, `IQ`
 
 - **Prompt Template**:
@@ -1496,10 +1541,11 @@ Read the following function signature and docstring, and fully implement the fun
 - **Description**:
   > Live Code Bench is a benchmark for evaluating code generation models on real-world coding tasks. It includes a variety of programming problems with test cases to assess the model's ability to generate correct and efficient code solutions. **By default the code is executed in local environment. We recommend using sandbox execution to safely run and evaluate the generated code, please refer to the [documentation](https://evalscope.readthedocs.io/en/latest/user_guides/sandbox.html) for more details.**
 - **Task Categories**: `Coding`
-- **Evaluation Metrics**: 
+- **Evaluation Metrics**: `acc`
 - **Aggregation Methods**: `mean_and_pass_at_k`
 - **Requires LLM Judge**: No
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `release_latest`
 
 - **Review Timeout (seconds)**: 6
@@ -1561,6 +1607,7 @@ Read the following function signature and docstring, and fully implement the fun
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `default`
 
 - **Prompt Template**:
@@ -1590,6 +1637,7 @@ Answer the following multiple choice question. The entire content of your respon
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `default`
 
 - **Prompt Template**:
@@ -1627,6 +1675,7 @@ D. 扭应力
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `Level 1`, `Level 2`, `Level 3`, `Level 4`, `Level 5`
 
 - **Prompt Template**:
@@ -1653,6 +1702,7 @@ Please reason step by step, and put your final answer within \boxed{{}}.
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `default`
 
 - **Prompt Template**:
@@ -1664,6 +1714,45 @@ Answer the following multiple choice question. The last line of your response sh
 {question}
 
 {choices}
+````
+
+</details>
+
+---
+
+### MBPP
+
+[Back to Top](#llm-benchmarks)
+- **Dataset Name**: `mbpp`
+- **Dataset ID**: [google-research-datasets/mbpp](https://modelscope.cn/datasets/google-research-datasets/mbpp/summary)
+- **Description**:
+  > MBPP (Mostly Basic Python Problems Dataset): The benchmark consists of around 1,000 crowd-sourced Python programming problems, designed to be solvable by entry level programmers, covering programming fundamentals, standard library functionality, and so on. Each problem consists of a task description, code solution and 3 automated test cases.**Sandbox environment is needed for execution to safely run and evaluate the generated code, please refer to the [documentation](https://evalscope.readthedocs.io/en/latest/user_guides/sandbox.html) for more details.**
+- **Task Categories**: `Coding`
+- **Evaluation Metrics**: `acc`
+- **Aggregation Methods**: `mean_and_pass_at_k`
+- **Requires LLM Judge**: No
+- **Default Shots**: 3-shot
+- **Evaluation Split**: `test`
+- **Subsets**: `full`
+
+- **Review Timeout (seconds)**: 20
+- **Sandbox Configuration**: 
+```json
+{
+    "image": "python:3.11-slim",
+    "tools_config": {
+        "shell_executor": {},
+        "python_executor": {}
+    }
+}
+```
+- **Prompt Template**:
+<details><summary>View</summary>
+
+````text
+You are an expert Python programmer, and here is your task: {question} Your code should pass these tests:
+
+{tests}
 ````
 
 </details>
@@ -1682,6 +1771,7 @@ Answer the following multiple choice question. The last line of your response sh
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `validation`
 - **Subsets**: `default`
 
 - **Prompt Template**:
@@ -1711,6 +1801,7 @@ Answer the following multiple choice question. The entire content of your respon
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 4-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `bn`, `de`, `en`, `es`, `fr`, `ja`, `ru`, `sw`, `te`, `th`, `zh`
 
 - **Prompt Template**:
@@ -1739,6 +1830,7 @@ Please reason step by step, and put your final answer within \boxed{{}}.
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: Yes
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `train`
 - **Subsets**: `default`
 
 - **Prompt Template**:
@@ -1765,6 +1857,7 @@ Please reason step by step, and put your final answer within \boxed{{}}.
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 5-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `default`
 
 - **Prompt Template**:
@@ -1811,6 +1904,7 @@ Text to process:
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 5-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `default`
 
 - **Prompt Template**:
@@ -1857,6 +1951,7 @@ Text to process:
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 5-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `abstract_algebra`, `anatomy`, `astronomy`, `business_ethics`, `clinical_knowledge`, `college_biology`, `college_chemistry`, `college_computer_science`, `college_mathematics`, `college_medicine`, `college_physics`, `computer_security`, `conceptual_physics`, `econometrics`, `electrical_engineering`, `elementary_mathematics`, `formal_logic`, `global_facts`, `high_school_biology`, `high_school_chemistry`, `high_school_computer_science`, `high_school_european_history`, `high_school_geography`, `high_school_government_and_politics`, `high_school_macroeconomics`, `high_school_mathematics`, `high_school_microeconomics`, `high_school_physics`, `high_school_psychology`, `high_school_statistics`, `high_school_us_history`, `high_school_world_history`, `human_aging`, `human_sexuality`, `international_law`, `jurisprudence`, `logical_fallacies`, `machine_learning`, `management`, `marketing`, `medical_genetics`, `miscellaneous`, `moral_disputes`, `moral_scenarios`, `nutrition`, `philosophy`, `prehistory`, `professional_accounting`, `professional_law`, `professional_medicine`, `professional_psychology`, `public_relations`, `security_studies`, `sociology`, `us_foreign_policy`, `virology`, `world_religions`
 
 - **Prompt Template**:
@@ -1886,6 +1981,7 @@ Answer the following multiple choice question. The last line of your response sh
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 5-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `biology`, `business`, `chemistry`, `computer science`, `economics`, `engineering`, `health`, `history`, `law`, `math`, `other`, `philosophy`, `physics`, `psychology`
 
 - **Prompt Template**:
@@ -1917,6 +2013,7 @@ Options:
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `abstract_algebra`, `anatomy`, `astronomy`, `business_ethics`, `clinical_knowledge`, `college_biology`, `college_chemistry`, `college_computer_science`, `college_mathematics`, `college_medicine`, `college_physics`, `computer_security`, `conceptual_physics`, `econometrics`, `electrical_engineering`, `elementary_mathematics`, `formal_logic`, `global_facts`, `high_school_biology`, `high_school_chemistry`, `high_school_computer_science`, `high_school_european_history`, `high_school_geography`, `high_school_government_and_politics`, `high_school_macroeconomics`, `high_school_mathematics`, `high_school_microeconomics`, `high_school_physics`, `high_school_psychology`, `high_school_statistics`, `high_school_us_history`, `high_school_world_history`, `human_aging`, `human_sexuality`, `international_law`, `jurisprudence`, `logical_fallacies`, `machine_learning`, `management`, `marketing`, `medical_genetics`, `miscellaneous`, `moral_disputes`, `moral_scenarios`, `nutrition`, `philosophy`, `prehistory`, `professional_accounting`, `professional_law`, `professional_medicine`, `professional_psychology`, `public_relations`, `security_studies`, `sociology`, `us_foreign_policy`, `virology`, `world_religions`
 
 - **Prompt Template**:
@@ -1946,6 +2043,7 @@ Answer the following multiple choice question. The last line of your response sh
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `default`
 
 - **Prompt Template**:
@@ -1975,6 +2073,7 @@ Answer the following multiple choice question. The entire content of your respon
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `train`
 - **Subsets**: `Chinese`, `English`, `French`, `German`, `Hindi`, `Italian`, `Portuguese`, `Russian`, `Spanish`, `Thai`, `Vietnamese`
 
 - **Extra Parameters**: 
@@ -1995,6 +2094,86 @@ Answer the following multiple choice question. The entire content of your respon
 
 ---
 
+### MultiPL-E HumanEval
+
+[Back to Top](#llm-benchmarks)
+- **Dataset Name**: `multiple_humaneval`
+- **Dataset ID**: [evalscope/MultiPL-E](https://modelscope.cn/datasets/evalscope/MultiPL-E/summary)
+- **Description**:
+  > This multilingual HumanEval was from MultiPL-E. 18 languages were implemented and tested. **Sandbox environment is needed for execution to safely run and evaluate the generated code, please refer to the [documentation](https://evalscope.readthedocs.io/en/latest/user_guides/sandbox.html) for more details.**
+- **Task Categories**: `Coding`
+- **Evaluation Metrics**: `acc`
+- **Aggregation Methods**: `mean_and_pass_at_k`
+- **Requires LLM Judge**: No
+- **Default Shots**: 0-shot
+- **Evaluation Split**: `test`
+- **Subsets**: `humaneval-cpp`, `humaneval-cs`, `humaneval-d`, `humaneval-go`, `humaneval-java`, `humaneval-jl`, `humaneval-js`, `humaneval-lua`, `humaneval-php`, `humaneval-pl`, `humaneval-r`, `humaneval-rb`, `humaneval-rkt`, `humaneval-rs`, `humaneval-scala`, `humaneval-sh`, `humaneval-swift`, `humaneval-ts`
+
+- **Review Timeout (seconds)**: 30
+- **Sandbox Configuration**: 
+```json
+{
+    "image": "volcengine/sandbox-fusion:server-20250609",
+    "tools_config": {
+        "shell_executor": {},
+        "python_executor": {},
+        "multi_code_executor": {}
+    },
+    "memory_limit": "2g",
+    "cpu_limit": "2.0"
+}
+```
+- **Prompt Template**:
+<details><summary>View</summary>
+
+````text
+{prompt}
+````
+
+</details>
+
+---
+
+### MultiPL-E MBPP
+
+[Back to Top](#llm-benchmarks)
+- **Dataset Name**: `multiple_mbpp`
+- **Dataset ID**: [evalscope/MultiPL-E](https://modelscope.cn/datasets/evalscope/MultiPL-E/summary)
+- **Description**:
+  > This multilingual MBPP was from MultiPL-E. 18 languages were implemented and tested. **Sandbox environment is needed for execution to safely run and evaluate the generated code, please refer to the [documentation](https://evalscope.readthedocs.io/en/latest/user_guides/sandbox.html) for more details.**
+- **Task Categories**: `Coding`
+- **Evaluation Metrics**: `acc`
+- **Aggregation Methods**: `mean_and_pass_at_k`
+- **Requires LLM Judge**: No
+- **Default Shots**: 0-shot
+- **Evaluation Split**: `test`
+- **Subsets**: `mbpp-cpp`, `mbpp-cs`, `mbpp-d`, `mbpp-go`, `mbpp-java`, `mbpp-jl`, `mbpp-js`, `mbpp-lua`, `mbpp-php`, `mbpp-pl`, `mbpp-r`, `mbpp-rb`, `mbpp-rkt`, `mbpp-rs`, `mbpp-scala`, `mbpp-sh`, `mbpp-swift`, `mbpp-ts`
+
+- **Review Timeout (seconds)**: 30
+- **Sandbox Configuration**: 
+```json
+{
+    "image": "volcengine/sandbox-fusion:server-20250609",
+    "tools_config": {
+        "shell_executor": {},
+        "python_executor": {},
+        "multi_code_executor": {}
+    },
+    "memory_limit": "2g",
+    "cpu_limit": "2.0"
+}
+```
+- **Prompt Template**:
+<details><summary>View</summary>
+
+````text
+{prompt}
+````
+
+</details>
+
+---
+
 ### MusicTrivia
 
 [Back to Top](#llm-benchmarks)
@@ -2007,6 +2186,7 @@ Answer the following multiple choice question. The entire content of your respon
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `default`
 
 - **Prompt Template**:
@@ -2036,6 +2216,7 @@ Answer the following multiple choice question. The entire content of your respon
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `murder_mysteries`, `object_placements`, `team_allocation`
 
 - **Prompt Template**:
@@ -2065,6 +2246,7 @@ Answer the following multiple choice question. The last line of your response sh
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: Yes
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `chinese`, `english`
 
 - **Extra Parameters**: 
@@ -2165,6 +2347,7 @@ Don't give information outside the document or repeat your findings.
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 5-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `default`
 
 - **Prompt Template**:
@@ -2211,6 +2394,7 @@ Text to process:
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `train`
 - **Subsets**: `default`
 
 - **Extra Parameters**: 
@@ -2248,6 +2432,7 @@ Text to process:
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `validation`
 - **Subsets**: `default`
 
 - **Prompt Template**:
@@ -2277,6 +2462,7 @@ Answer the following multiple choice question. The entire content of your respon
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `ar`, `bn`, `de`, `en`, `es`, `fr`, `id`, `it`, `ja`, `ko`, `ms`, `pt`, `ru`, `sw`, `te`, `th`, `vi`, `zh`
 
 - **Prompt Template**:
@@ -2302,6 +2488,7 @@ Answer the following multiple choice question. The entire content of your respon
 - **Aggregation Methods**: `f1`
 - **Requires LLM Judge**: No
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `gsm8k`, `math`, `olympiadbench`, `omnimath`
 
 - **Prompt Template**:
@@ -2340,6 +2527,7 @@ Please put your final answer (i.e., the index) in oxed{{}}.
 - **Aggregation Methods**: `f1`
 - **Requires LLM Judge**: No
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `default`
 
 - **Prompt Template**:
@@ -2366,6 +2554,7 @@ Please answer YES or NO or MAYBE without an explanation.
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `validation`
 - **Subsets**: `default`
 
 - **Prompt Template**:
@@ -2395,6 +2584,7 @@ Answer the following multiple choice question. The entire content of your respon
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 3-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `high`, `middle`
 
 - **Prompt Template**:
@@ -2424,6 +2614,7 @@ Answer the following multiple choice question. The last line of your response sh
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `default`
 
 - **Review Timeout (seconds)**: 300
@@ -2521,6 +2712,7 @@ Example:
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `default`
 
 - **Prompt Template**:
@@ -2550,6 +2742,7 @@ Answer the following multiple choice question. The entire content of your respon
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: Yes
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `default`
 
 - **Prompt Template**:
@@ -2577,6 +2770,7 @@ Answer the question:
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `validation`
 - **Subsets**: `default`
 
 - **Prompt Template**:
@@ -2600,12 +2794,13 @@ Answer the following multiple choice question. The entire content of your respon
 - **Dataset Name**: `super_gpqa`
 - **Dataset ID**: [m-a-p/SuperGPQA](https://modelscope.cn/datasets/m-a-p/SuperGPQA/summary)
 - **Description**:
-  > SuperGPQA is a large-scale multiple-choice question answering dataset, designed to evaluate the generalization ability of models across different fields. It contains 100,000+ questions from 50+ fields, with each question having 10 options.
+  > SuperGPQA is a large-scale multiple-choice question answering dataset, designed to evaluate the generalization ability of models across different fields. It contains 26,000+ questions from 50+ fields, with each question having 10 options.
 - **Task Categories**: `Knowledge`, `MCQ`
 - **Evaluation Metrics**: `acc`
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `train`
 - **Subsets**: `Aeronautical and Astronautical Science and Technology`, `Agricultural Engineering`, `Animal Husbandry`, `Applied Economics`, `Aquaculture`, `Architecture`, `Art Studies`, `Astronomy`, `Atmospheric Science`, `Basic Medicine`, `Biology`, `Business Administration`, `Chemical Engineering and Technology`, `Chemistry`, `Civil Engineering`, `Clinical Medicine`, `Computer Science and Technology`, `Control Science and Engineering`, `Crop Science`, `Education`, `Electrical Engineering`, `Electronic Science and Technology`, `Environmental Science and Engineering`, `Food Science and Engineering`, `Forestry Engineering`, `Forestry`, `Geography`, `Geological Resources and Geological Engineering`, `Geology`, `Geophysics`, `History`, `Hydraulic Engineering`, `Information and Communication Engineering`, `Instrument Science and Technology`, `Journalism and Communication`, `Language and Literature`, `Law`, `Library, Information and Archival Management`, `Management Science and Engineering`, `Materials Science and Engineering`, `Mathematics`, `Mechanical Engineering`, `Mechanics`, `Metallurgical Engineering`, `Military Science`, `Mining Engineering`, `Musicology`, `Naval Architecture and Ocean Engineering`, `Nuclear Science and Technology`, `Oceanography`, `Optical Engineering`, `Petroleum and Natural Gas Engineering`, `Pharmacy`, `Philosophy`, `Physical Education`, `Physical Oceanography`, `Physics`, `Political Science`, `Power Engineering and Engineering Thermophysics`, `Psychology`, `Public Administration`, `Public Health and Preventive Medicine`, `Sociology`, `Stomatology`, `Surveying and Mapping Science and Technology`, `Systems Science`, `Textile Science and Engineering`, `Theoretical Economics`, `Traditional Chinese Medicine`, `Transportation Engineering`, `Veterinary Medicine`, `Weapon Science and Technology`
 
 - **Prompt Template**:
@@ -2635,6 +2830,7 @@ Answer the following multiple choice question. The last line of your response sh
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `default`
 
 - **Extra Parameters**: 
@@ -2680,6 +2876,7 @@ Answer the following multiple choice question. The last line of your response sh
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `default`
 
 - **Extra Parameters**: 
@@ -2725,6 +2922,7 @@ Answer the following multiple choice question. The last line of your response sh
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `default`
 
 - **Extra Parameters**: 
@@ -2770,6 +2968,7 @@ Answer the following multiple choice question. The last line of your response sh
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `validation`
 - **Subsets**: `rc.wikipedia`
 
 - **Prompt Template**:
@@ -2802,6 +3001,7 @@ Keep your The last line of your response should be of the form "ANSWER: [ANSWER]
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `validation`
 - **Subsets**: `multiple_choice`
 
 - **Extra Parameters**: 
@@ -2841,6 +3041,7 @@ Answer the following multiple choice question. The entire content of your respon
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `validation`
 - **Subsets**: `default`
 
 - **Prompt Template**:
@@ -2866,10 +3067,11 @@ Answer the following multiple choice question. The entire content of your respon
 - **Description**:
   > WMT2024 news translation benchmark supporting multiple language pairs. Each subset represents a specific translation direction
 - **Task Categories**: `MachineTranslation`, `MultiLingual`
-- **Evaluation Metrics**: `bert_score`, `bleu`, `comet`
+- **Evaluation Metrics**: `{'bert_score': {'model_id_or_path': 'AI-ModelScope/xlm-roberta-large', 'model_type': 'xlm-roberta-large'}}`, `{'bleu': {}}`, `{'comet': {'model_id_or_path': 'evalscope/wmt22-comet-da'}}`
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `en-ar_eg`, `en-ar_sa`, `en-bg_bg`, `en-bn_in`, `en-ca_es`, `en-cs_cz`, `en-da_dk`, `en-de_de`, `en-el_gr`, `en-es_mx`, `en-et_ee`, `en-fa_ir`, `en-fi_fi`, `en-fil_ph`, `en-fr_ca`, `en-fr_fr`, `en-gu_in`, `en-he_il`, `en-hi_in`, `en-hr_hr`, `en-hu_hu`, `en-id_id`, `en-is_is`, `en-it_it`, `en-ja_jp`, `en-kn_in`, `en-ko_kr`, `en-lt_lt`, `en-lv_lv`, `en-ml_in`, `en-mr_in`, `en-nl_nl`, `en-no_no`, `en-pa_in`, `en-pl_pl`, `en-pt_br`, `en-pt_pt`, `en-ro_ro`, `en-ru_ru`, `en-sk_sk`, `en-sl_si`, `en-sr_rs`, `en-sv_se`, `en-sw_ke`, `en-sw_tz`, `en-ta_in`, `en-te_in`, `en-th_th`, `en-tr_tr`, `en-uk_ua`, `en-ur_pk`, `en-vi_vn`, `en-zh_cn`, `en-zh_tw`, `en-zu_za`
 
 - **Prompt Template**:
@@ -2898,6 +3100,7 @@ Translate the following {source_language} sentence into {target_language}:
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 5-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `default`
 
 - **Prompt Template**:
@@ -2944,6 +3147,7 @@ Text to process:
 - **Aggregation Methods**: `mean`
 - **Requires LLM Judge**: No
 - **Default Shots**: 0-shot
+- **Evaluation Split**: `test`
 - **Subsets**: `grid_mode`
 
 - **Prompt Template**:

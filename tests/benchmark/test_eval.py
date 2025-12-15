@@ -327,6 +327,10 @@ class TestNativeBenchmark(TestBenchmark):
         """Test IFEval dataset."""
         self._run_dataset_test('ifeval')
 
+    def test_ifeval_load(self):
+        """Test IFEval dataset loading."""
+        self._run_dataset_load_test('ifeval')
+
     def test_hle(self):
         """Test HLE dataset."""
         dataset_args = {
@@ -476,6 +480,12 @@ class TestNativeBenchmark(TestBenchmark):
         }
         self._run_dataset_test('multi_if', dataset_args, limit=5)
 
+    def test_multi_if_load(self):
+        dataset_args = {
+            # 'subset_list': ['English', 'Chinese'],
+        }
+        self._run_dataset_load_test('multi_if', dataset_args)
+
     def test_healthbench(self):
         dataset_args = {
             'subset_list': ['health_data_tasks'],
@@ -616,7 +626,7 @@ class TestNativeBenchmark(TestBenchmark):
             'subset_list': ['en-zh_cn'],
             'few_shot_num': 0,
         }
-        self._run_dataset_test('wmt24pp', dataset_args, limit=10, use_cache='outputs/20251106_153525', rerun_review=True)
+        self._run_dataset_test('wmt24pp', dataset_args, limit=10)
 
     def test_swe_bench_verified(self):
         """Test SWE-bench-verified dataset."""
@@ -673,6 +683,12 @@ class TestNativeBenchmark(TestBenchmark):
         dataset_args = {
         }
         self._run_dataset_test('ifbench', dataset_args, limit=30, use_cache='outputs/20251124_200641')
+
+    def test_ifbench_load(self):
+        """Test IFBench dataset loading."""
+        dataset_args = {
+        }
+        self._run_dataset_load_test('ifbench', dataset_args, debug=False, judge_worker_num=5)
 
     def test_eq_bench(self):
         """Test EQ-Bench dataset."""

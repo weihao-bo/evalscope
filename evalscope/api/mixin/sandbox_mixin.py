@@ -22,8 +22,8 @@ class SandboxMixin:
         self._manager: Optional['SandboxManager'] = None
         """Sandbox manager instance."""
 
-        self._sandbox_id: Optional[str] = None
-        """Sandbox ID."""
+        self._pool_size: int = self._task_config.judge_worker_num if self._task_config else 1
+        """Sandbox pool size."""
 
         self._use_custom_image: bool = False
         """Whether to use a custom sandbox image."""
@@ -48,11 +48,6 @@ class SandboxMixin:
         """Get the sandbox manager instance."""
         return self._manager
 
-    @property
-    def sandbox_id(self) -> Optional[str]:
-        """Get the sandbox ID."""
-        return self._sandbox_id
-
     @thread_safe
     def ensure_sandbox_ready(self) -> bool:
         """
@@ -62,7 +57,7 @@ class SandboxMixin:
         if not self.use_sandbox:
             return False
 
-        if self._initialized and self._manager and self._sandbox_id:
+        if self._initialized and self._manager and self._manager._pool_initialized:
             return True
 
         # Initialize manager and sandbox using the class-level runner
@@ -116,15 +111,10 @@ class SandboxMixin:
         if not self.use_sandbox:
             return None
 
-        from ms_enclave.sandbox.manager import HttpSandboxManager, LocalSandboxManager
+        from ms_enclave.sandbox.manager import SandboxManagerFactory
 
         manager_config = self._task_config.sandbox_manager_config or {}
-        if manager_config.get('base_url'):
-            # Remote manager
-            self._manager = HttpSandboxManager(**manager_config)
-        else:
-            # Local manager
-            self._manager = LocalSandboxManager(**manager_config)
+        self._manager = SandboxManagerFactory.create_manager(**manager_config)
 
         await self._manager.start()
         logger.info('Sandbox manager initialized.')
@@ -134,13 +124,13 @@ class SandboxMixin:
         """Initialize the sandbox manager."""
         return AsyncioLoopRunner.run(self.init_sandbox_manager_async())
 
-    async def init_sandbox_async(self) -> Optional[str]:
+    async def init_sandbox_async(self):
         """Initialize the sandbox instance asynchronously."""
-        if self._sandbox_id is not None:
-            return self._sandbox_id
+        if self._manager is not None and self._manager._pool_initialized:
+            return
 
         if not self.use_sandbox:
-            return None
+            return
 
         from ms_enclave.sandbox.model import DockerSandboxConfig, SandboxType
 
@@ -153,12 +143,12 @@ class SandboxMixin:
             self.build_docker_image(sandbox_config.image, path=build_context_path, dockerfile=dockerfile)
             logger.info(f'Sandbox image built: {sandbox_config.image}')
 
-        self._sandbox_id = await self._manager.create_sandbox(sandbox_type=sandbox_type, config=sandbox_config)
+        sandbox_pool = await self._manager.initialize_pool(
+            pool_size=self._pool_size, sandbox_type=sandbox_type, config=sandbox_config
+        )
 
-        sandbox_info = await self._manager.get_sandbox_info(self._sandbox_id)
-
-        logger.info(f'Sandbox of type {sandbox_type} initialized. Info: {sandbox_info.model_dump(exclude_none=True)}')
-        return self._sandbox_id
+        logger.info(f'Sandbox pool initialized with {len(sandbox_pool)} sandboxes.')
+        return
 
     def init_sandbox(self) -> Optional[str]:
         """Initialize the sandbox instance."""
@@ -174,36 +164,48 @@ class SandboxMixin:
             logger.warning('Sandbox is not initialized.')
             return {'error': 'Sandbox is not initialized.'}
 
+        import asyncio
+        import concurrent.futures as cf
         from ms_enclave.sandbox.model import ExecutionStatus, ToolResult
 
         async def _execute_async():
             if language.lower() == 'python':
                 tool_name = 'python_executor'
                 parameters = {'code': code, 'timeout': timeout}
-                result = await self._manager.execute_tool(self._sandbox_id, tool_name, parameters)
             elif language.lower() == 'shell':
                 tool_name = 'shell_executor'
                 parameters = {'command': code, 'timeout': timeout}
-                result = await self._manager.execute_tool(self._sandbox_id, tool_name, parameters)
             else:
-                logger.warning(f"Unsupported language: {language}. Supported languages are 'python' and 'shell'.")
-                result = ToolResult(
-                    status=ExecutionStatus.ERROR,
-                    tool_name='code_executor',
-                    output=f"Unsupported language: {language}. Supported languages are 'python' and 'shell'."
-                )
+                tool_name = 'multi_code_executor'
+                parameters = {'code': code, 'language': language, 'run_timeout': timeout}
+            result = await self._manager.execute_tool_in_pool(tool_name, parameters, timeout=timeout + 10)
             return result
 
         # Execute in background loop via class-level runner
-        result = AsyncioLoopRunner.run(_execute_async(), timeout=timeout + 10)
-        return result.model_dump(exclude_none=True)
+        try:
+            result = AsyncioLoopRunner.run(_execute_async(), timeout=timeout + 10)
+            return result.model_dump(exclude_none=True)
+        except (TimeoutError, asyncio.TimeoutError, cf.TimeoutError) as e:
+            logger.error(f'Code execution in sandbox timed out: {e!r}')
+            return {
+                'status': ExecutionStatus.TIMEOUT,
+                'error': 'Code execution timed out.',
+                'metadata': {
+                    'code': code,
+                    'language': language
+                }
+            }
+        except Exception as e:
+            # Avoid surfacing unexpected exceptions to callers
+            logger.exception(f'Code execution in sandbox failed: {e!r}')
+            return {'status': ExecutionStatus.ERROR, 'error': str(e), 'metadata': {'code': code, 'language': language}}
 
     def sandbox_finalize(self, *args, **kwargs):
         """Finalize the sandbox manager."""
         if self._manager:
             try:
                 # Stop the manager but keep the shared loop alive
-                AsyncioLoopRunner.run(self._manager.stop(), timeout=30)
+                AsyncioLoopRunner.run(self._manager.stop(), timeout=600)
                 logger.info('Sandbox manager finalized.')
             except Exception as e:
                 logger.warning(f'Error finalizing sandbox manager: {e}')
