@@ -1,4 +1,6 @@
+import json
 import os
+import httpx
 from openai import APIStatusError, BadRequestError, OpenAI, PermissionDeniedError, UnprocessableEntityError
 from openai._types import NOT_GIVEN
 from openai.types.chat import ChatCompletion
@@ -12,8 +14,10 @@ from evalscope.utils.argument_utils import get_supported_params
 from evalscope.utils.function_utils import retry_call
 from .utils.openai import (
     chat_choices_from_openai,
+    chat_choices_from_openai_with_reasoning,
     collect_stream_response,
     model_output_from_openai,
+    model_output_from_raw_json,
     openai_chat_messages,
     openai_chat_tool_choice,
     openai_chat_tools,
@@ -89,25 +93,84 @@ class OpenAICompatibleAPI(ModelAPI):
         self.validate_request_params(request)
 
         try:
-            # generate completion and save response for model call
-            completion = retry_call(
-                self.client.chat.completions.create,
-                retries=config.retries,
-                sleep_interval=config.retry_interval,
-                **request
+            # Check if we need to use raw HTTP request to preserve extra_body structure
+            # Some APIs (e.g., Gemini with thinkingConfig) require extra_body to be sent
+            # as a nested field, but OpenAI SDK expands it to top-level, causing the
+            # server not to return reasoning_content.
+            extra_body = request.get('extra_body', {})
+            has_thinking_config = (
+                isinstance(extra_body, dict) and
+                'generationConfig' in extra_body and
+                'thinkingConfig' in extra_body.get('generationConfig', {})
             )
-            # handle streaming response
-            if not isinstance(completion, ChatCompletion):
-                completion = collect_stream_response(completion)
-            response = completion.model_dump()
-            self.on_response(response)
 
-            # return output and call
-            choices = self.chat_choices_from_completion(completion, tools)
-            return model_output_from_openai(completion, choices)
+            if has_thinking_config:
+                # Use raw HTTP request to preserve extra_body structure
+                raw_json = self._send_raw_request(request, config)
+                self.on_response(raw_json)
+                return model_output_from_raw_json(raw_json, tools)
+            else:
+                # Use standard OpenAI SDK
+                raw_response = retry_call(
+                    self.client.chat.completions.with_raw_response.create,
+                    retries=config.retries,
+                    sleep_interval=config.retry_interval,
+                    **request
+                )
+
+                # Extract raw JSON to get reasoning_content before SDK parsing
+                raw_json = None
+                try:
+                    raw_json = json.loads(raw_response.content)
+                except (json.JSONDecodeError, AttributeError):
+                    pass
+
+                # Get the parsed completion object
+                completion = raw_response.parse()
+
+                # handle streaming response
+                if not isinstance(completion, ChatCompletion):
+                    completion = collect_stream_response(completion)
+                response = completion.model_dump()
+                self.on_response(response)
+
+                # return output and call - pass raw_json to extract reasoning_content
+                choices = self.chat_choices_from_completion(completion, tools, raw_json)
+                return model_output_from_openai(completion, choices)
 
         except (BadRequestError, UnprocessableEntityError, PermissionDeniedError) as ex:
             return self.handle_bad_request(ex)
+
+    def _send_raw_request(self, request: Dict[str, Any], config: GenerateConfig) -> Dict[str, Any]:
+        """Send raw HTTP request to preserve extra_body structure.
+
+        Some APIs require extra_body to be sent as a nested field in the request,
+        but OpenAI SDK expands it to top-level. This method sends the request
+        directly via httpx to preserve the structure.
+        """
+        import time
+
+        url = f"{self.base_url}/chat/completions"
+        headers = {
+            "Authorization": f"Bearer {self.api_key}",
+            "Content-Type": "application/json"
+        }
+
+        # Clean up request - remove NOT_GIVEN values
+        clean_request = {k: v for k, v in request.items() if v is not NOT_GIVEN}
+
+        for attempt in range(config.retries + 1):
+            try:
+                with httpx.Client(timeout=300.0) as client:
+                    response = client.post(url, headers=headers, json=clean_request)
+                    response.raise_for_status()
+                    return response.json()
+            except (httpx.HTTPStatusError, httpx.RequestError) as e:
+                if attempt < config.retries:
+                    logger.warning(f"Request failed (attempt {attempt + 1}/{config.retries + 1}): {e}")
+                    time.sleep(config.retry_interval)
+                else:
+                    raise
 
     def resolve_tools(self, tools: List[ToolInfo], tool_choice: ToolChoice,
                       config: GenerateConfig) -> Tuple[List[ToolInfo], ToolChoice, GenerateConfig]:
@@ -141,8 +204,17 @@ class OpenAICompatibleAPI(ModelAPI):
         pass
 
     def chat_choices_from_completion(self, completion: ChatCompletion,
-                                     tools: List[ToolInfo]) -> List[ChatCompletionChoice]:
-        """Hook for subclasses to do custom chat choice processing."""
+                                     tools: List[ToolInfo],
+                                     raw_json: Optional[Dict[str, Any]] = None) -> List[ChatCompletionChoice]:
+        """Hook for subclasses to do custom chat choice processing.
+
+        Args:
+            completion: Parsed ChatCompletion object from OpenAI SDK
+            tools: List of tool definitions
+            raw_json: Optional raw JSON response to extract non-standard fields like reasoning_content
+        """
+        if raw_json is not None:
+            return chat_choices_from_openai_with_reasoning(completion, tools, raw_json)
         return chat_choices_from_openai(completion, tools)
 
     def handle_bad_request(self, ex: APIStatusError) -> Union[ModelOutput, Exception]:

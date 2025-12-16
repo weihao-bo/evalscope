@@ -162,3 +162,6 @@ CLAUDE.md
 Tool/
 docs/zh/learn/
 examples/api_test/
+
+# benchmark research (contains API keys)
+benchmark_research/

@@ -530,6 +530,75 @@ def model_output_from_openai(
     )
 
 
+def model_output_from_raw_json(raw_json: Dict[str, Any], tools: List[ToolInfo]) -> ModelOutput:
+    """Create ModelOutput directly from raw JSON response.
+
+    This is used when we bypass OpenAI SDK to preserve extra_body structure
+    for APIs that require it (e.g., Gemini with thinkingConfig).
+    """
+    model = raw_json.get('model', '')
+    raw_choices = raw_json.get('choices', [])
+    raw_usage = raw_json.get('usage', {})
+
+    # Process choices with reasoning_content
+    choices = []
+    for raw_choice in sorted(raw_choices, key=lambda c: c.get('index', 0)):
+        raw_message = raw_choice.get('message', {})
+
+        # Extract reasoning_content from raw response
+        reasoning = raw_message.get('reasoning_content') or raw_message.get('reasoning')
+        content_text = raw_message.get('content', '')
+        refusal = raw_message.get('refusal')
+
+        # Build content with reasoning if available
+        if reasoning is not None:
+            content: Union[str, List[Content]] = [
+                ContentReasoning(reasoning=str(reasoning)),
+                ContentText(text=content_text, refusal=True if refusal else None),
+            ]
+        elif refusal is not None:
+            content = [ContentText(text=content_text, refusal=True)]
+        else:
+            content = content_text
+
+        # Create assistant message
+        message = ChatMessageAssistant(
+            content=content,
+            model=model,
+            source='generate',
+            tool_calls=None,  # TODO: Parse tool_calls if needed
+        )
+
+        # Parse finish_reason
+        finish_reason = raw_choice.get('finish_reason', 'stop')
+        stop_reason = as_stop_reason(finish_reason)
+
+        choices.append(
+            ChatCompletionChoice(
+                message=message,
+                stop_reason=stop_reason,
+                logprobs=None,
+            )
+        )
+
+    # Parse usage
+    usage = None
+    if raw_usage:
+        completion_tokens_details = raw_usage.get('completion_tokens_details', {})
+        usage = ModelUsage(
+            input_tokens=raw_usage.get('prompt_tokens', 0),
+            output_tokens=raw_usage.get('completion_tokens', 0),
+            total_tokens=raw_usage.get('total_tokens', 0),
+            reasoning_tokens=completion_tokens_details.get('reasoning_tokens') if completion_tokens_details else None,
+        )
+
+    return ModelOutput(
+        model=model,
+        choices=choices,
+        usage=usage,
+    )
+
+
 def chat_choices_from_openai(response: ChatCompletion, tools: List[ToolInfo]) -> List[ChatCompletionChoice]:
     choices = list(response.choices)
     choices.sort(key=lambda c: c.index)
@@ -543,6 +612,89 @@ def chat_choices_from_openai(response: ChatCompletion, tools: List[ToolInfo]) ->
             ),
         ) for choice in choices
     ]
+
+
+def chat_choices_from_openai_with_reasoning(
+    response: ChatCompletion,
+    tools: List[ToolInfo],
+    raw_json: Dict[str, Any]
+) -> List[ChatCompletionChoice]:
+    """Process chat choices with reasoning_content from raw JSON response.
+
+    Some OpenAI-compatible APIs (e.g., Gemini with thinkingConfig) return reasoning_content
+    in the response, but OpenAI SDK doesn't parse non-standard fields. This function
+    extracts reasoning_content from raw JSON and injects it into the parsed response.
+    """
+    choices = list(response.choices)
+    choices.sort(key=lambda c: c.index)
+
+    # Extract reasoning_content from raw JSON for each choice
+    raw_choices = raw_json.get('choices', []) if raw_json else []
+    reasoning_map = {}
+    for raw_choice in raw_choices:
+        idx = raw_choice.get('index', 0)
+        msg = raw_choice.get('message', {})
+        reasoning = msg.get('reasoning_content') or msg.get('reasoning')
+        if reasoning:
+            reasoning_map[idx] = reasoning
+
+    result = []
+    for choice in choices:
+        # Get reasoning_content from raw JSON if available
+        reasoning = reasoning_map.get(choice.index)
+
+        # Build the message with reasoning
+        message = chat_message_assistant_from_openai_with_reasoning(
+            response.model, choice.message, tools, reasoning
+        )
+
+        result.append(
+            ChatCompletionChoice(
+                message=message,
+                stop_reason=as_stop_reason(choice.finish_reason),
+                logprobs=(
+                    Logprobs(**choice.logprobs.model_dump())
+                    if choice.logprobs and choice.logprobs.content is not None else None
+                ),
+            )
+        )
+    return result
+
+
+def chat_message_assistant_from_openai_with_reasoning(
+    model: str,
+    message: ChatCompletionMessage,
+    tools: List[ToolInfo],
+    reasoning: Optional[str] = None
+) -> ChatMessageAssistant:
+    """Create ChatMessageAssistant with explicit reasoning content.
+
+    Similar to chat_message_assistant_from_openai but accepts reasoning as explicit parameter
+    instead of trying to get it from the message object (which may not have it due to SDK parsing).
+    """
+    refusal = getattr(message, 'refusal', None)
+
+    # Use explicitly provided reasoning or try to get from message
+    if reasoning is None:
+        reasoning = getattr(message, 'reasoning_content', None) or getattr(message, 'reasoning', None)
+
+    msg_content = refusal or message.content or ''
+    if reasoning is not None:
+        content: Union[str, List[Content]] = [
+            ContentReasoning(reasoning=str(reasoning)),
+            ContentText(text=msg_content, refusal=True if refusal else None),
+        ]
+    elif refusal is not None:
+        content = [ContentText(text=msg_content, refusal=True)]
+    else:
+        content = msg_content
+
+    return ChatMessageAssistant(
+        content=content,
+        model=model,
+        source='generate',
+        tool_calls=chat_tool_calls_from_openai(message, tools),
+    )
 
 
 def openai_handle_bad_request(model_name: str, e: APIStatusError) -> Union[ModelOutput, Exception]:
